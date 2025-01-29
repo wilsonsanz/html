@@ -25,7 +25,7 @@ Este es un proyecto web interactivo para aprender sobre programación estructura
 
 1. Clona este repositorio:
    ```bash
-   git clone https://github.com/tu-usuario/aprende-programacion.git
+   git clone https://github.com/wilsonsanz/html
    ```
 2. Abre el archivo `index.html` en tu navegador.
 
