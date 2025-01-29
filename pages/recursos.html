@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursos de Programación</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+            color: #00ff00;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .btn-primary {
+            background-color: #00ff00;
+            border-color: #00ff00;
+        }
+
+    </style>
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById("matrixCanvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const columns = Math.floor(canvas.width / 20);
+        const drops = Array(columns).fill(0);
+        
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#00ff00";
+            ctx.font = "20px monospace";
+            drops.forEach((y, index) => {
+                const text = String.fromCharCode(33 + Math.random() * 94);
+                const x = index * 20;
+                ctx.fillText(text, x, y);
+                if (y > canvas.height || Math.random() > 0.975) {
+                    drops[index] = 0;
+                } else {
+                    drops[index] += 20;
+                }
+            });
+        }
+        setInterval(drawMatrix, 50);
+    </script>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="../index.html">Programación</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="estructurada.html">Programación Estructurada</a></li>
+                        <li class="nav-item"><a class="nav-link" href="poo.html">POO</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="recursos.html">Recursos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="container mt-5">
+        <h1 class="text-center">Recursos de Programación</h1>
+        <p class="text-center">Explora documentación, tutoriales y videos para mejorar tus conocimientos en programación.</p>
+        
+        <section class="mt-4">
+            <h2>Documentación Oficial</h2>
+            <ul>
+                <li><a href="https://developer.mozilla.org/es/" target="_blank">MDN Web Docs</a> - Documentación detallada sobre tecnologías web.</li>
+                <li><a href="https://docs.python.org/es/" target="_blank">Documentación de Python</a> - Información oficial sobre el lenguaje Python.</li>
+                <li><a href="https://docs.oracle.com/en/java/" target="_blank">Documentación de Java</a> - Guías y referencias sobre Java.</li>
+            </ul>
+        </section>
+        
+        <section class="mt-4">
+            <h2>Tutoriales</h2>
+            <ul>
+                <li><a href="https://www.w3schools.com/" target="_blank">W3Schools</a> - Tutoriales interactivos sobre HTML, CSS, JavaScript y más.</li>
+                <li><a href="https://www.tutorialspoint.com/" target="_blank">TutorialsPoint</a> - Amplia variedad de tutoriales sobre programación.</li>
+                <li><a href="https://roadmap.sh/" target="_blank">Roadmap.sh</a> - Guías sobre qué aprender en diferentes áreas de programación.</li>
+            </ul>
+        </section>
+        
+        <section class="mt-4">
+            <h2>Videos Recomendados</h2>
+            <ul>
+                <li><a href="https://www.youtube.com/c/FaztCode" target="_blank">Fazt Code</a> - Canal de YouTube con cursos de programación.</li>
+                <li><a href="https://www.youtube.com/c/Midudev" target="_blank">Midudev</a> - Contenido sobre desarrollo web y programación.</li>
+                <li><a href="https://www.youtube.com/c/ProgrammingwithMosh" target="_blank">Programming with Mosh</a> - Explicaciones claras sobre diversos temas de programación.</li>
+            </ul>
+        </section>
+    </main>
+    
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>&copy; 2025 Aprende Programación por Wilson Sánchez. Todos los derechos reservados.</p>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programación Estructurada</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+            color: #00ff00;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .btn-primary {
+            background-color: #00ff00;
+            border-color: #00ff00;
+        }
+
+    </style>
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById("matrixCanvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const columns = Math.floor(canvas.width / 20);
+        const drops = Array(columns).fill(0);
+        
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#00ff00";
+            ctx.font = "20px monospace";
+            drops.forEach((y, index) => {
+                const text = String.fromCharCode(33 + Math.random() * 94);
+                const x = index * 20;
+                ctx.fillText(text, x, y);
+                if (y > canvas.height || Math.random() > 0.975) {
+                    drops[index] = 0;
+                } else {
+                    drops[index] += 20;
+                }
+            });
+        }
+        setInterval(drawMatrix, 50);
+    </script>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="../index.html">Programación</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="estructurada.html">Programación Estructurada</a></li>
+                        <li class="nav-item"><a class="nav-link" href="poo.html">POO</a></li>
+                        <li class="nav-item"><a class="nav-link" href="recursos.html">Recursos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="container mt-5">
+        <h1 class="text-center">Programación Estructurada</h1>
+        <p>La programación estructurada es un paradigma de programación que mejora la claridad, calidad y desarrollo del software mediante el uso de estructuras de control como secuencia, selección y repetición.</p>
+        
+        <h2>Conceptos Básicos</h2>
+        <ul>
+            <li><strong>Variables:</strong> Espacios en memoria para almacenar datos.</li>
+            <li><strong>Condicionales:</strong> Permiten tomar decisiones en el código (if, else).</li>
+            <li><strong>Bucles:</strong> Permiten repetir una tarea varias veces (for, while).</li>
+            <li><strong>Funciones:</strong> Bloques de código reutilizables que realizan una tarea específica.</li>
+        </ul>
+        
+        <h2>Ejemplo Interactivo</h2>
+        <p>Ingresa un número y verifica si es par o impar:</p>
+        <input type="number" id="numero" class="form-control w-25" placeholder="Ingresa un número">
+        <button class="btn btn-primary mt-2" onclick="verificarParidad()">Verificar</button>
+        <p id="resultado" class="mt-3"></p>
+
+        <h2 class="mt-4">Juego de Click Rápido</h2>
+<p>Haz clic en el botón tan rápido como puedas cuando aparezca:</p>
+<button id="clickButton" class="btn btn-primary" style="display:none;">¡Haz clic!</button>
+<p id="clickTime" class="mt-3"></p>
+
+<script>
+    let button = document.getElementById("clickButton");
+    let clickTimeDisplay = document.getElementById("clickTime");
+    let startTime;
+    
+    function startGame() {
+        button.style.display = "none";
+        setTimeout(() => {
+            button.style.display = "inline-block";
+            startTime = new Date().getTime();
+        }, Math.floor(Math.random() * 3000) + 1000);  // Aparecerá entre 1 y 4 segundos
+    }
+
+    button.addEventListener("click", () => {
+        let endTime = new Date().getTime();
+        let reactionTime = (endTime - startTime) / 1000;
+        clickTimeDisplay.textContent = `Tu tiempo de reacción fue: ${reactionTime} segundos.`;
+        startGame();  // Reinicia el juego
+    });
+
+    startGame();  // Inicia el juego al cargar la página
+</script>
+
+<h2 class="mt-4">Juego de Adivinanza de Números</h2>
+<p>Intenta adivinar el número entre 1 y 100:</p>
+<input type="number" id="guessNumber" class="form-control" placeholder="Escribe tu número">
+<button id="submitGuess" class="btn btn-primary mt-2">Adivinar</button>
+<p id="result" class="mt-3"></p>
+
+<script>
+    let randomNumber = Math.floor(Math.random() * 100) + 1;
+    const submitButton = document.getElementById("submitGuess");
+    const result = document.getElementById("result");
+    
+    submitButton.addEventListener("click", () => {
+        const userGuess = parseInt(document.getElementById("guessNumber").value);
+        if (userGuess === randomNumber) {
+            result.textContent = "¡Correcto! Has adivinado el número.";
+            result.style.color = "green";
+        } else if (userGuess < randomNumber) {
+            result.textContent = "El número es mayor.";
+            result.style.color = "orange";
+        } else {
+            result.textContent = "El número es menor.";
+            result.style.color = "orange";
+        }
+    });
+</script>
+
+
+    </main>
+    
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>&copy; 2025 Aprende Programación por Wilson Sánchez. Todos los derechos reservados.</p>
+    </footer>
+    
+    <script>
+        function verificarParidad() {
+            let num = document.getElementById("numero").value;
+            let resultado = (num % 2 === 0) ? "El número es par." : "El número es impar.";
+            document.getElementById("resultado").innerText = resultado;
+        }
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
