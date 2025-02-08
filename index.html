@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aprende Programación</title>
-    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
         body {
             margin: 0;
-            overflow: hidden;
+            overflow: auto;
             background-color: black;
             color: #00ff00;
             font-family: Arial, sans-serif;
+            text-align: center;
         }
         canvas {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             z-index: -1;
         }
         .container {
@@ -32,42 +32,85 @@
         .btn-primary {
             background-color: #00ff00;
             border-color: #00ff00;
+            color: black;
+        }
+        .btn-primary:hover {
+            background-color: #00cc00;
+        }
+        #audioControls {
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <audio id="backgroundAudio" loop autoplay>
-        <source src="creep.mp3.mp3" type="audio/mp3">
-        
+    <audio id="backgroundAudio" loop>
+        <source src="dream.mp3" type="audio/mp3">
     </audio>
+
     <canvas id="matrixCanvas"></canvas>
+
     <script>
+        // Ajuste de canvas según el dispositivo
         const canvas = document.getElementById("matrixCanvas");
         const ctx = canvas.getContext("2d");
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        
+
+        function adjustCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        adjustCanvasSize();
+        window.addEventListener("resize", adjustCanvasSize);
+
         const columns = Math.floor(canvas.width / 20);
         const drops = Array(columns).fill(0);
-        
+
         function drawMatrix() {
             ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = "#00ff00";
             ctx.font = "20px monospace";
+
             drops.forEach((y, index) => {
                 const text = String.fromCharCode(33 + Math.random() * 94);
                 const x = index * 20;
                 ctx.fillText(text, x, y);
-                if (y > canvas.height || Math.random() > 0.975) {
-                    drops[index] = 0;
-                } else {
-                    drops[index] += 20;
-                }
+                drops[index] = y > canvas.height || Math.random() > 0.975 ? 0 : y + 20;
             });
         }
+
         setInterval(drawMatrix, 50);
-        
+
+        // Detectar si es un dispositivo táctil
+        function isTouchDevice() {
+            return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+        }
+
+        // Control de audio para móviles
+        document.addEventListener("DOMContentLoaded", () => {
+            const audio = document.getElementById("backgroundAudio");
+            const audioControls = document.createElement("button");
+            audioControls.id = "audioControls";
+            audioControls.className = "btn btn-primary";
+            audioControls.innerText = "Reproducir Música";
+
+            audioControls.onclick = () => {
+                if (audio.paused) {
+                    audio.play();
+                    audioControls.innerText = "Pausar Música";
+                } else {
+                    audio.pause();
+                    audioControls.innerText = "Reproducir Música";
+                }
+            };
+
+            if (isTouchDevice()) {
+                document.body.appendChild(audioControls);
+            } else {
+                audio.autoplay = true;
+                audio.play();
+            }
+        });
     </script>
 
     <header>
@@ -89,22 +132,20 @@
             </div>
         </nav>
     </header>
-    
-    <main class="container mt-5 text-center">
+
+    <main class="container mt-5">
         <h1>Bienvenido al Curso de Programación</h1>
-        <p>Aprende los fundamentos de la programación estructurada y la programación orientada a objetos. </p>
+        <p>Aprende los fundamentos de la programación estructurada y la programación orientada a objetos.</p>
         <p>
             Mi Nombre es Wilson Sánchez, actualmente soy estudiante de 3 semestre de Desarrollo de Software con amplia experiencia en lenguajes de programación como Java, Python, C#, C++, JavaScript, y más. 
             Aquí encontrarás explicaciones claras, ejemplos prácticos y ejercicios interactivos que te ayudarán a comprender los fundamentos de POO en lenguajes populares como Java, Python y C#.
         </p>
         <p>🌟 ¡Empieza hoy mismo y conviértete en un programador experto en POO! 🌟</p>
     </main>
-    
 
     <footer class="bg-dark text-white text-center py-3 mt-5">
         <p>&copy; 2025 Aprende Programación por Wilson Sánchez. Todos los derechos reservados.</p>
     </footer>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
