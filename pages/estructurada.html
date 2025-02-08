@@ -39,31 +39,67 @@
 <body>
     <canvas id="matrixCanvas"></canvas>
     <script>
+        // Ajuste de canvas según el dispositivo
         const canvas = document.getElementById("matrixCanvas");
         const ctx = canvas.getContext("2d");
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        
+
+        function adjustCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        adjustCanvasSize();
+        window.addEventListener("resize", adjustCanvasSize);
+
         const columns = Math.floor(canvas.width / 20);
         const drops = Array(columns).fill(0);
-        
+
         function drawMatrix() {
             ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = "#00ff00";
             ctx.font = "20px monospace";
+
             drops.forEach((y, index) => {
                 const text = String.fromCharCode(33 + Math.random() * 94);
                 const x = index * 20;
                 ctx.fillText(text, x, y);
-                if (y > canvas.height || Math.random() > 0.975) {
-                    drops[index] = 0;
-                } else {
-                    drops[index] += 20;
-                }
+                drops[index] = y > canvas.height || Math.random() > 0.975 ? 0 : y + 20;
             });
         }
+
         setInterval(drawMatrix, 50);
+
+        // Detectar si es un dispositivo táctil
+        function isTouchDevice() {
+            return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+        }
+
+        // Control de audio para móviles
+        document.addEventListener("DOMContentLoaded", () => {
+            const audio = document.getElementById("backgroundAudio");
+            const audioControls = document.createElement("button");
+            audioControls.id = "audioControls";
+            audioControls.className = "btn btn-primary";
+            audioControls.innerText = "Reproducir Música";
+
+            audioControls.onclick = () => {
+                if (audio.paused) {
+                    audio.play();
+                    audioControls.innerText = "Pausar Música";
+                } else {
+                    audio.pause();
+                    audioControls.innerText = "Reproducir Música";
+                }
+            };
+
+            if (isTouchDevice()) {
+                document.body.appendChild(audioControls);
+            } else {
+                audio.autoplay = true;
+                audio.play();
+            }
+        });
     </script>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
