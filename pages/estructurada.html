@@ -85,31 +85,6 @@
             return "ontouchstart" in window || navigator.maxTouchPoints > 0;
         }
 
-        // Control de audio para móviles
-        document.addEventListener("DOMContentLoaded", () => {
-            const audio = document.getElementById("backgroundAudio");
-            const audioControls = document.createElement("button");
-            audioControls.id = "audioControls";
-            audioControls.className = "btn btn-primary";
-            audioControls.innerText = "Reproducir Música";
-
-            audioControls.onclick = () => {
-                if (audio.paused) {
-                    audio.play();
-                    audioControls.innerText = "Pausar Música";
-                } else {
-                    audio.pause();
-                    audioControls.innerText = "Reproducir Música";
-                }
-            };
-
-            if (isTouchDevice()) {
-                document.body.appendChild(audioControls);
-            } else {
-                audio.autoplay = true;
-                audio.play();
-            }
-        });
     </script>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
