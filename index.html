@@ -1,155 +1,96 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aprende Programación</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <style>
-        body {
-            margin: 0;
-            overflow: auto;
-            background-color: black;
-            color: #00ff00;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-        }
-        .container {
-            position: relative;
-            z-index: 1;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-        }
-        .btn-primary {
-            background-color: #00ff00;
-            border-color: #00ff00;
-            color: black;
-        }
-        .btn-primary:hover {
-            background-color: #00cc00;
-        }
-        #audioControls {
-            margin-top: 10px;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Política de Privacidad — Vuelve Acasa</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; line-height:1.6; padding:24px; max-width:900px; margin:auto; }
+    h1, h2 { line-height:1.2; }
+    code, pre { background:#f6f8fa; padding:.2em .4em; border-radius:4px; }
+    .small { color:#666; font-size:.95em; }
+    ul { margin-top:.25rem; }
+  </style>
 </head>
 <body>
-    <audio id="backgroundAudio" loop>
-        <source src="dream.mp3" type="audio/mp3">
-    </audio>
+  <h1>Política de Privacidad</h1>
+  <p class="small">Última actualización: 24 October 2025</p>
 
-    <canvas id="matrixCanvas"></canvas>
+  <p>
+    Esta Política de Privacidad describe cómo <strong>Vuelve Acasa</strong> (“la App”) recopila, usa, comparte y protege la información
+    cuando utilizas nuestras funcionalidades para reportar y consultar mascotas perdidas.
+  </p>
 
-    <script>
-        // Ajuste de canvas según el dispositivo
-        const canvas = document.getElementById("matrixCanvas");
-        const ctx = canvas.getContext("2d");
+  <h2>1. Responsable y contacto</h2>
+  <p>
+    Para consultas sobre privacidad puedes escribir a: <a href="mailto:wilsonsanz17@gmail.com">wilsonsanz17@gmail.com</a>.
+  </p>
 
-        function adjustCanvasSize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
+  <h2>2. Datos que recopilamos</h2>
+  <ul>
+    <li><strong>Ubicación (precisa y aproximada)</strong>: si lo permites, para mostrarte reportes cercanos y geolocalizar avisos que publiques.</li>
+    <li><strong>Imágenes/Fotos</strong>: cuando adjuntas fotos de una mascota en un reporte.</li>
+    <li><strong>Almacenamiento</strong>: acceso a imágenes locales para adjuntar archivos al reporte.</li>
+    <li><strong>Identificador de publicidad (AAID)</strong>: si la App muestra anuncios (AdMob) para medición, prevención de fraude y personalización de anuncios según tu configuración de Google.</li>
+    <li><strong>Datos de uso y diagnósticos</strong> (por ejemplo, registros de fallos): únicamente para mejorar estabilidad y rendimiento (p. ej., Firebase Crashlytics/Analytics si están habilitados).</li>
+  </ul>
 
-        adjustCanvasSize();
-        window.addEventListener("resize", adjustCanvasSize);
+  <h2>3. Finalidades del tratamiento</h2>
+  <ul>
+    <li>Prestar las funcionalidades principales: publicar y consultar reportes, mostrar el mapa y la lista de avisos.</li>
+    <li>Ubicación cercana: ordenar/filtrar avisos según tu proximidad.</li>
+    <li>Seguridad, prevención de fraude y mantenimiento.</li>
+    <li>Estadística y mejora de la App.</li>
+    <li>Publicidad (si está habilitada): mostrar anuncios mediante Google AdMob, conforme a tus preferencias de Google.</li>
+  </ul>
 
-        const columns = Math.floor(canvas.width / 20);
-        const drops = Array(columns).fill(0);
+  <h2>4. Base legal</h2>
+  <p>
+    Tratamos datos con base en tu <strong>consentimiento</strong> (permisos de cámara/ubicación/almacenamiento),
+    y en el <strong>interés legítimo</strong> de mantener la seguridad y mejorar el servicio.
+  </p>
 
-        function drawMatrix() {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#00ff00";
-            ctx.font = "20px monospace";
+  <h2>5. Compartición de datos</h2>
+  <p>
+    No vendemos tu información personal. Podemos compartir datos con <strong>proveedores de servicios</strong> estrictamente necesarios
+    para operar la App (por ejemplo, <em>Google Firebase</em>, <em>Google AdMob</em>) bajo sus respectivas políticas y medidas de seguridad.
+  </p>
 
-            drops.forEach((y, index) => {
-                const text = String.fromCharCode(33 + Math.random() * 94);
-                const x = index * 20;
-                ctx.fillText(text, x, y);
-                drops[index] = y > canvas.height || Math.random() > 0.975 ? 0 : y + 20;
-            });
-        }
+  <h2>6. Retención</h2>
+  <p>
+    Conservamos los datos el tiempo necesario para las finalidades indicadas o según exijan leyes aplicables. Puedes solicitar eliminación de tus reportes escribiendo a wilsonsanz17@gmail.com.
+  </p>
 
-        setInterval(drawMatrix, 50);
+  <h2>7. Seguridad</h2>
+  <p>
+    Protegemos la transmisión mediante <strong>HTTPS</strong> y aplicamos medidas razonables para salvaguardar la información.
+  </p>
 
-        // Detectar si es un dispositivo táctil
-        function isTouchDevice() {
-            return "ontouchstart" in window || navigator.maxTouchPoints > 0;
-        }
+  <h2>8. Tus opciones</h2>
+  <ul>
+    <li>Puedes <strong>revocar permisos</strong> (cámara/ubicación/almacenamiento) desde los ajustes del sistema.</li>
+    <li>Puedes solicitar la <strong>eliminación</strong> de reportes asociados a ti escribiendo a wilsonsanz17@gmail.com.</li>
+    <li>Puedes desinstalar la App para detener la recopilación futura.</li>
+  </ul>
 
-        // Control de audio para móviles
-        document.addEventListener("DOMContentLoaded", () => {
-            const audio = document.getElementById("backgroundAudio");
-            const audioControls = document.createElement("button");
-            audioControls.id = "audioControls";
-            audioControls.className = "btn btn-primary";
-            audioControls.innerText = "Reproducir Música";
+  <h2>9. Menores de edad</h2>
+  <p>
+    La App no está dirigida a menores de 13 años. Si crees que un menor nos suministró datos sin el consentimiento correspondiente, contáctanos para eliminarlos.
+  </p>
 
-            audioControls.onclick = () => {
-                if (audio.paused) {
-                    audio.play();
-                    audioControls.innerText = "Pausar Música";
-                } else {
-                    audio.pause();
-                    audioControls.innerText = "Reproducir Música";
-                }
-            };
+  <h2>10. Transferencias</h2>
+  <p>
+    Nuestros proveedores pueden operar globalmente; por ello, los datos podrían procesarse fuera de tu país, con garantías adecuadas de protección.
+  </p>
 
-            if (isTouchDevice()) {
-                document.body.appendChild(audioControls);
-            } else {
-                audio.autoplay = true;
-                audio.play();
-            }
-        });
-    </script>
+  <h2>11. Cambios en esta política</h2>
+  <p>
+    Podremos actualizar esta Política. Publicaremos la versión vigente y la fecha de última actualización.
+  </p>
 
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="index.html">Programación</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="pages/estructurada.html">Programación Estructurada</a></li>
-                        <li class="nav-item"><a class="nav-link" href="pages/poo.html">POO</a></li>
-                        <li class="nav-item"><a class="nav-link" href="pages/recursos.html">Recursos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="pages/contacto.html">Contacto</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <main class="container mt-5">
-        <h1>Bienvenido al Curso de Programación</h1>
-        <p>Aprende los fundamentos de la programación estructurada y la programación orientada a objetos.</p>
-        <p>
-            Mi Nombre es Wilson Sánchez, actualmente soy estudiante de 3 semestre de Desarrollo de Software con amplia experiencia en lenguajes de programación como Java, Python, C#, C++, JavaScript, y más. 
-            Aquí encontrarás explicaciones claras, ejemplos prácticos y ejercicios interactivos que te ayudarán a comprender los fundamentos de POO en lenguajes populares como Java, Python y C#.
-        </p>
-        <p>🌟 ¡Empieza hoy mismo y conviértete en un programador experto en POO! 🌟</p>
-        <br>
-        <img src="michon.jpg">
-    </main>
-
-    <footer class="bg-dark text-white text-center py-3 mt-5">
-        <p>&copy; 2025 Aprende Programación por Wilson Sánchez. Todos los derechos reservados.</p>
-    </footer>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-
+  <h2>12. Contacto</h2>
+  <p>
+    ¿Dudas o solicitudes sobre tus datos? Escríbenos a <a href="mailto:wilsonsanz17@gmail.com">wilsonsanz17@gmail.com</a>.
+  </p>
 </body>
 </html>
